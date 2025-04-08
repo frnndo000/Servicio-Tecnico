@@ -51,14 +51,6 @@ void mostrar_lista_tickets(List *tickets) {
     printf("No hay tickets pendientes. \n") ;
   } else {
     printf("Tickets pendientes: \n") ;
-
-    
-    Node* nodo = tickets->head ;
-    while (nodo != NULL) {
-      Ticket* temp = (Ticket*) nodo->data ;
-      printf("ID: %s, Prioridad: %d, Hora: %s", temp->id, temp->prioridad, ctime(&temp->hora)) ;
-      nodo = nodo->next ;  
-    }
   }  
 }
 
