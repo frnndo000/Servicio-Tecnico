@@ -34,12 +34,16 @@ void registrar_ticket(List *ticket) {
     return ;
   }
 
-  printf("Registrar nuevo ticket\n");
+  printf("Registrar nuevo ticket\n") ;
   printf("Ingrese su ID: ") ;
   scanf("%s", nuevoTicket->id) ;
+
+  nuevoTicket->prioridad = 3 ;
+  nuevoTicket->hora = time(NULL) ;
+
 }
 
-void mostrar_lista_pacientes(List *pacientes) {
+void mostrar_lista_tickets(List *ticket) {
   // Mostrar pacientes en la cola de espera
   printf("Tickets en espera: \n");
   // Aquí implementarías la lógica para recorrer y mostrar los pacientes
@@ -72,7 +76,7 @@ int main() {
       // Lógica para mostrar pacientes por prioridad
       break;
     case '6':
-      puts("Saliendo del sistema de gestión de tickets...");
+      puts("Saliendo del sistema de gestion de tickets...");
       break;
     default:
       puts("Opción no válida. Por favor, intente de nuevo.");
