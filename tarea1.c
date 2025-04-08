@@ -2,6 +2,14 @@
 #include "tdas/extra.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
+typedef struct {
+  char id [30] ;
+  char descripcion [200] ;
+  int prioridad ;
+  time_t hora ;
+} Ticket ;
 
 // Menú principal
 void mostrarMenuPrincipal() {
@@ -14,13 +22,18 @@ void mostrarMenuPrincipal() {
   puts("2) Asignar prioridad al ticket");
   puts("3) Mostrar lista de tickets pendientes");
   puts("4) Procesar siguiente ticket");
-  puts("5) Buscar ticket (ID)");
+  puts("5) Buscar ticket ");
   puts("6) Salir");
 }
 
-void registrar_paciente(List *pacientes) {
-  printf("Registrar nuevo paciente\n");
-  // Aquí implementarías la lógica para registrar un nuevo paciente
+void registrar_ticket(List *ticket) {
+  Ticket* nuevoTicket = malloc(sizeof(Ticket)) ;
+
+  printf("Registrar nuevo ticket\n");
+  printf("Ingrese su ID: ") ;
+  scanf("%c", nuevoTicket->id) ;
+
+
 }
 
 void mostrar_lista_pacientes(List *pacientes) {
