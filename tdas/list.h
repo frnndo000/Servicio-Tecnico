@@ -1,43 +1,41 @@
 #ifndef LIST_H
 #define LIST_H
 
-typedef struct List List;
+#include <stdio.h>
+#include <stdlib.h>
 
-// Esta función crea una lista vacía y devuelve un puntero a la lista.
-List *list_create();
+// Definición de la estructura Node
+typedef struct Node {
+    void *data;         // Datos que contiene el nodo
+    struct Node *next;  // Apuntador al siguiente nodo
+} Node;
 
-// Esta función devuelve un puntero al primer elemento de la lista.
-void *list_first(List *L);
+// Definición de la estructura List
+typedef struct List {
+    Node *head;     // Primer nodo de la lista
+    Node *tail;     // Último nodo de la lista
+    Node *current;  // Nodo actual de la lista (para iteraciones)
+    int size;       // Tamaño de la lista
+} List;
 
-// Esta función mueve el puntero de la lista al siguiente elemento y devuelve un
-// puntero a dicho elemento.
-void *list_next(List *L);
+// Declaración de las funciones para manejar la lista
+List *list_create();  // Crea una lista vacía
+void *list_first(List *L);  // Retorna el primer elemento de la lista
+void *list_next(List *L);   // Mueve al siguiente elemento de la lista
+void list_pushFront(List *L, void *dato);  // Inserta al inicio de la lista
+void list_pushBack(List *L, void *dato);   // Inserta al final de la lista
+void list_pushCurrent(List *L, void *dato);  // Inserta después del elemento actual
 
-// Esta función inserta un nuevo elemento al inicio de la lista.
-void list_pushFront(List *L, void *dato);
+void *list_popFront(List *L);  // Elimina el primer elemento de la lista
+void *list_popBack(List *L);   // Elimina el último elemento de la lista
+void *list_popCurrent(List *L);  // Elimina el elemento actual de la lista
 
-// Esta función inserta un nuevo elemento al final de la lista.
-void list_pushBack(List *L, void *dato);
+void list_clean(List *L);  // Elimina todos los elementos de la lista
 
-// Esta función inserta un nuevo elemento a continuación del actual de la lista.
-void list_pushCurrent(List *L, void *dato);
+// Función para insertar un elemento en orden usando la función lower_than
+void list_sortedInsert(List *L, void *data, int (*lower_than)(void *data1, void *data2));
 
-// Esta función elimina el primer elemento de la lista.
-void *list_popFront(List *L);
-
-// Esta función elimina el último elemento de la lista.
-void *list_popBack(List *L);
-
-// Esta función elimina el elemento actual de la lista.
-void *list_popCurrent(List *L);
-
-// Esta función elimina todos los elementos de la lista.
-void list_clean(List *L);
-
-// Función para insertar ordenado de acuerdo a la función lower_than
-void list_sortedInsert(List *L, void *data,
-                       int (*lower_than)(void *data1, void *data2));
-
-int list_size(List* L);
+// Función para obtener el tamaño de la lista
+int list_size(List *L);
 
 #endif
