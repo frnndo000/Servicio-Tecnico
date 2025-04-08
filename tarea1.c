@@ -7,14 +7,14 @@
 void mostrarMenuPrincipal() {
   limpiarPantalla();
   puts("========================================");
-  puts("     Sistema de Gestión Hospitalaria");
+  puts("----------- Servicio Tecnico -----------");
   puts("========================================");
 
-  puts("1) Registrar paciente");
-  puts("2) Asignar prioridad a paciente");
-  puts("3) Mostrar lista de espera");
-  puts("4) Atender al siguiente paciente");
-  puts("5) Mostrar pacientes por prioridad");
+  puts("1) Registrar ticket");
+  puts("2) Asignar prioridad al ticket");
+  puts("3) Mostrar lista de tickets pendientes");
+  puts("4) Procesar siguiente ticket");
+  puts("5) Buscar ticket (ID)");
   puts("6) Salir");
 }
 
@@ -35,7 +35,7 @@ int main() {
 
   do {
     mostrarMenuPrincipal();
-    printf("Ingrese su opción: ");
+    printf("Ingrese su opcion: ");
     scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
                            // newline anterior
 
