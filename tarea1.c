@@ -1,5 +1,5 @@
 #include "tdas/list.h"
-//#include "tdas/list.c"
+#include "tdas/list.c"
 #include "tdas/extra.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,14 +53,14 @@ void mostrar_lista_tickets(List *tickets) {
   } else {
     printf("Tickets pendientes: \n") ;
 
-    //Node* nodo = tickets->head ;
-    //while (!nodo) {
-      //Ticket* temp = (Ticket*) nodo->data ;
-      //printf("ID: %s, Prioridad: %d, Hora: %s", temp->id, temp->prioridad, ctime(&temp->hora)) ;
-      //nodo = nodo->next ;  
-  }
-}  
-
+    Node* nodo = tickets->head ;
+    while (!nodo) {
+      Ticket* temp = (Ticket*) nodo->data ;
+      printf("ID: %s, Prioridad: %d, Hora: %s", temp->id, temp->prioridad, ctime(&temp->hora)) ;
+      nodo = nodo->next ;  
+    }
+  }  
+}
 
 int main() {
   char opcion;
