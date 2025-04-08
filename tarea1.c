@@ -54,7 +54,7 @@ int main() {
 
     switch (opcion) {
     case '1':
-      registrar_paciente(pacientes);
+     //registrar_paciente(pacientes);
       break;
     case '2':
       // Lógica para asignar prioridad
