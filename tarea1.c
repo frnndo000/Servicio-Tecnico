@@ -41,12 +41,19 @@ void registrar_ticket(List *ticket) {
   nuevoTicket->prioridad = 3 ;
   nuevoTicket->hora = time(NULL) ;
 
+  list_pushBack(ticket, nuevoTicket) ;
+
+  printf("El ticket '%s' ha sido registrado correctamente.\n", nuevoTicket->id) ;
 }
 
-void mostrar_lista_tickets(List *ticket) {
-  // Mostrar pacientes en la cola de espera
+void mostrar_lista_tickets(List *tickets) {
   printf("Tickets en espera: \n");
-  // Aquí implementarías la lógica para recorrer y mostrar los pacientes
+  
+  if (tickets == NULL) {
+    printf("No hay tickets pendientes. \n") ;
+  }
+
+  printf("Tickets pendientes: \n") ;
 }
 
 int main() {
@@ -67,7 +74,7 @@ int main() {
       // Lógica para asignar prioridad
       break;
     case '3':
-      //mostrar_lista_pacientes(pacientes);
+      mostrar_lista_tickets(tickets) ;
       break;
     case '4':
       // Lógica para atender al siguiente paciente
