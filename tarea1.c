@@ -47,11 +47,11 @@ void registrar_ticket(List *ticket) {
 }
 
 void mostrar_lista_tickets(List *tickets) {
-  if (tickets == NULL) {
+  if (list_size(ticket) == 0) {
     printf("No hay tickets pendientes. \n") ;
   } else {
     printf("Tickets pendientes: \n") ;
-    //printf("%s", *tickets[0]->id) ;
+    printf("%s", tickets[0]->id) ;
   }  
 }
 
