@@ -1,5 +1,5 @@
-#include "tdas/list.h"
-//#include "tdas/list.c"
+//#include "tdas/list.h"
+#include "tdas/list.c"
 #include "tdas/extra.h"
 #include <stdio.h>
 #include <stdlib.h>
