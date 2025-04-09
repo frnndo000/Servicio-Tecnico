@@ -37,13 +37,17 @@ void registrar_ticket(List *ticket) {
   printf("Registrar nuevo ticket\n") ;
   printf("Ingrese su ID: ") ;
   scanf("%s", nuevoTicket->id) ;
+  getchar() ;
+
+  printf("Describa el problema: ") ;
+  fgets(nuevoTicket->descripcion, 200, stdin) ;
 
   nuevoTicket->prioridad = 3 ;
   nuevoTicket->hora = time(NULL) ;
 
   list_pushBack(ticket, nuevoTicket) ;
 
-  printf("El ticket '%s' ha sido registrado correctamente.\n", nuevoTicket->id) ;
+  printf("El ticket %s ha sido registrado correctamente.\n", nuevoTicket->id) ;
 }
 
 void mostrar_lista_tickets(List *tickets) {
@@ -51,12 +55,17 @@ void mostrar_lista_tickets(List *tickets) {
     printf("No hay tickets pendientes. \n") ;
   } else {
     printf("Tickets pendientes: \n") ;
+    
+    int index = 1 ;
+    //Node* nodo = tickets->head ;
+    Ticket* temp = (Ticket *) list_first(tickets) ;
+    while (temp != NULL) { 
+      //Ticket* temp = (Ticket *) list_first(tickets) ;
+      printf("%d, ID: %s, Descripcion: %s, Prioridad: %d, Hora: %s", 
+          index, temp->id, temp->descripcion, temp->prioridad, ctime(&temp->hora)) ;
 
-    Node *nodo = tickets->head;
-    while (nodo != NULL) { 
-      Ticket *temp = (Ticket *)nodo->data;
-      printf("ID: %s, Prioridad: %d, Hora: %s", temp->id, temp->prioridad, ctime(&temp->hora));
-      nodo = nodo->next;
+      index++ ; 
+      temp = (Ticket*) list_next(tickets) ;
     }
   }  
 }
