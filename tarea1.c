@@ -54,19 +54,25 @@ void mostrar_lista_tickets(List *tickets) {
   if (list_size(tickets) == 0) {
     printf("No hay tickets pendientes. \n") ;
   } else {
-    printf("Tickets pendientes: \n") ;
+    printf("\nTickets pendientes: \n") ;
     
+    printf("=============================================================================\n") ;
+    printf("| %-2s | %-15s | %-13s | %-9s | %-20s |\n", 
+               "#", "ID", "Prioridad", "Descripcion", "Hora") ;
+    printf("=============================================================================\n") ;
+
     int index = 1 ;
-    //Node* nodo = tickets->head ;
     Ticket* temp = (Ticket *) list_first(tickets) ;
     while (temp != NULL) { 
-      //Ticket* temp = (Ticket *) list_first(tickets) ;
-      printf("%d, ID: %s, Descripcion: %s, Prioridad: %d, Hora: %s", 
-          index, temp->id, temp->descripcion, temp->prioridad, ctime(&temp->hora)) ;
+      char horaStr[20];
+      strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&temp->hora)) ;
 
+      printf("| %-2d | %-15s | %-10d | %-25.25s | %-8s |\n", 
+                index, temp->id, temp->prioridad, temp->descripcion, horaStr) ; 
       index++ ; 
       temp = (Ticket*) list_next(tickets) ;
     }
+    printf("=============================================================================\n") ;
   }  
 }
 
