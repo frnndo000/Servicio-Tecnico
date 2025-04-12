@@ -57,7 +57,7 @@ void mostrar_lista_tickets(List *tickets) {
     printf("\nTickets pendientes: \n") ;
     
     printf("=============================================================================\n") ;
-    printf("| %-2s | %-15s | %-10s | %-25s | %-20s |\n", 
+    printf("| %-2s | %-15s | %-10s | %-25s | %-8s |\n", 
                "#", "ID", "Prioridad", "Descripcion", "Hora") ;
     printf("=============================================================================\n") ;
 
