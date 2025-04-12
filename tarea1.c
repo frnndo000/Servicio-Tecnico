@@ -47,7 +47,7 @@ void registrar_ticket(List *ticket) {
   printf("(4) Television\n") ;
   printf("(5) Otro\n") ;
 
-  scanf("%s", nuevoTicket->dispositivo) ;
+  scanf("%d", nuevoTicket->dispositivo) ;
   getchar() ;
 
   printf("Describa el problema: ") ;
