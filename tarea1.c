@@ -41,7 +41,7 @@ void registrar_ticket(List *ticket) {
   getchar() ;
 
   printf("Seleccione tipo de dispositivo:\n") ;
-  printf("(1) Smarphone\n") ;
+  printf("(1) Smartphone\n") ;
   printf("(2) Computador\n") ;
   printf("(3) Electrodomestico\n") ;
   printf("(4) Television\n") ;
