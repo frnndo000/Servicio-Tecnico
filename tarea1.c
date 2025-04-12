@@ -122,7 +122,47 @@ void mostrar_lista_tickets(List *tickets) {
     t = list_next(ordenados) ;
   }
     printf("=============================================================================\n") ;
-} 
+}
+
+void procesar_siguiente_ticket(List *tickets) {
+  if (list_size(tickets) == 0) {
+    printf("No hay tickets para procesar.\n") ;
+    return ;
+  }
+
+  Ticket* mejor = NULL ;
+  Ticket* actual = list_first(tickets) ;
+
+  while (actual != NULL) {
+    if (!mejor || actual->prioridad < mejor->prioridad ||
+        (actual->prioridad == mejor->prioridad && difftime(actual->hora, mejor->hora) < 0)) {
+      mejor = actual ;
+    }
+    actual = list_next(tickets) ;
+  }
+
+  actual = list_first(tickets) ;
+  while (actual != NULL) {
+    if (actual == mejor) {
+      list_popCurrent(tickets) ;
+      break;
+    }
+    actual = list_next(tickets) ;
+  }
+
+  if (mejor) {
+    char horaStr[20];
+    strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&mejor->hora));
+    char *prioridadF = mejor->prioridad == 1 ? "Alto" : mejor->prioridad == 2 ? "Medio" : "Bajo";
+
+    printf("Procesando ticket: %s\n", mejor->id) ;
+    printf("Descripcion: %s\n", mejor->descripcion) ;
+    printf("Prioridad: %s\n", prioridadF) ;
+    printf("Hora: %s\n", horaStr) ;
+
+    free(mejor) ;
+  }
+}
 
 int main() {
   char opcion;
@@ -140,7 +180,7 @@ int main() {
       break;
     case '3': mostrar_lista_tickets(lista_tickets) ;
       break;
-    case '4'://procesar_siguiente_ticket(lista_tickets) ;
+    case '4': procesar_siguiente_ticket(lista_tickets) ;
       break;
     case '5'://buscar_ticket(lista_tickets) ;
       break;
