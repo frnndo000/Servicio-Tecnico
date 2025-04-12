@@ -41,6 +41,7 @@ void registrar_ticket(List *ticket) {
 
   printf("Describa el problema: ") ;
   fgets(nuevoTicket->descripcion, 25, stdin) ;
+  getchar() ;
 
   nuevoTicket->prioridad = 3 ;
   nuevoTicket->hora = time(NULL) ;
@@ -105,7 +106,7 @@ int main() {
       puts("Saliendo del sistema de gestion de tickets...");
       break;
     default:
-      puts("Opción no válida. Por favor, intente de nuevo.");
+      puts("Opcion no valida. Por favor, intente de nuevo.");
     }
     presioneTeclaParaContinuar();
 
