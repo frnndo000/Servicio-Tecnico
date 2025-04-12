@@ -7,6 +7,7 @@
 typedef struct {
   char id [30] ;
   char descripcion [200] ;
+  int dispositivo ;
   int prioridad ;
   time_t hora ;
 } Ticket ;
@@ -37,6 +38,16 @@ void registrar_ticket(List *ticket) {
   printf("Registrar nuevo ticket\n") ;
   printf("Ingrese su ID: ") ;
   scanf("%s", nuevoTicket->id) ;
+  getchar() ;
+
+  printf("Seleccione tipo de dispositivo:\n") ;
+  printf("(1) Smarphone\n") ;
+  printf("(2) Computador\n") ;
+  printf("(3) Electrodomestico\n") ;
+  printf("(4) Television\n") ;
+  printf("(5) Otro\n") ;
+
+  scanf("%s", nuevoTicket->dispositivo) ;
   getchar() ;
 
   printf("Describa el problema: ") ;
