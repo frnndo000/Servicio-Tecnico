@@ -184,7 +184,7 @@ void buscar_ticket(List *tickets) {
       strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&temp->hora)) ;
       char *prioridadF = temp->prioridad == 1 ? "Alto" : temp->prioridad == 2 ? "Medio" : "Bajo" ;
 
-      printf("ID: %d\n", temp->id) ;
+      printf("ID: %s\n", temp->id) ;
       printf("Descripcion: %s\n", temp->descripcion) ;
       printf("Prioridad: %s\n", prioridadF) ;
       printf("Hora de registro: %s\n", horaStr) ;
@@ -206,21 +206,13 @@ int main() {
     scanf(" %c", &opcion); 
 
     switch (opcion) {
-    case '1': registrar_ticket(lista_tickets) ;
-      break;
-    case '2': asignar_prioridad(lista_tickets) ;
-      break;
-    case '3': mostrar_lista_tickets(lista_tickets) ;
-      break;
-    case '4': procesar_siguiente_ticket(lista_tickets) ;
-      break;
-    case '5'://buscar_ticket(lista_tickets) ;
-      break;
-    case '6':
-      puts("Saliendo del sistema de gestion de tickets...");
-      break;
-    default:
-      puts("Opcion no valida. Por favor, intente de nuevo.");
+    case '1': registrar_ticket(lista_tickets) ; break;
+    case '2': asignar_prioridad(lista_tickets) ; break;
+    case '3': mostrar_lista_tickets(lista_tickets) ; break;
+    case '4': procesar_siguiente_ticket(lista_tickets) ; break;
+    case '5': buscar_ticket(lista_tickets) ; break;
+    case '6': puts("Saliendo del sistema de gestion de tickets...") ; break ;
+    default: puts("Opcion no valida. Por favor, intente de nuevo.");
     }
     presioneTeclaParaContinuar();
 
