@@ -158,11 +158,11 @@ void procesar_siguiente_ticket(List *tickets) {
     printf("Procesando ticket: %s\n", mejor->id) ;
     printf("Dispositivo: ") ;
     switch (mejor->dispositivo) {
-      case 1 : printf("Smartphone") ; break ;
-      case 2 : printf("Computador") ; break ;
-      case 3 : printf("Electrodomestico") ; break ;
-      case 4 : printf("Television") ; break ;
-      case 5 : printf("Otro") ; break ;
+      case 1 : printf("Smartphone\n") ; break ;
+      case 2 : printf("Computador\n") ; break ;
+      case 3 : printf("Electrodomestico\n") ; break ;
+      case 4 : printf("Television\n") ; break ;
+      case 5 : printf("Otro\n") ; break ;
     }
     printf("Descripcion: %s\n", mejor->descripcion) ;
     printf("Prioridad: %s\n", prioridadF) ;
@@ -170,6 +170,30 @@ void procesar_siguiente_ticket(List *tickets) {
 
     free(mejor) ;
   }
+}
+
+void buscar_ticket(List *tickets) {
+  char id[30] ;
+  printf("Ingrese ID a buscar: ") ; 
+  scanf("%s", id) ;
+
+  Ticket* temp = list_first(tickets) ;
+  while (temp != NULL) {
+    if (strcmp(temp->id, id) == 0) {
+      char horaStr[20] ;
+      strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&temp->hora)) ;
+      char *prioridadF = temp->prioridad == 1 ? "Alto" : temp->prioridad == 2 ? "Medio" : "Bajo" ;
+
+      printf("ID: %d\n", temp->id) ;
+      printf("Descripcion: %s\n", temp->descripcion) ;
+      printf("Prioridad: %s\n", prioridadF) ;
+      printf("Hora de registro: %s\n", horaStr) ;
+      return;
+    }
+    temp = list_next(tickets) ;
+  }
+  printf("Ticket no encontrado.\n") ;
+
 }
 
 int main() {
