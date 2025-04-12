@@ -156,19 +156,14 @@ void procesar_siguiente_ticket(List *tickets) {
     char *prioridadF = mejor->prioridad == 1 ? "Alto" : mejor->prioridad == 2 ? "Medio" : "Bajo";
 
     printf("Procesando ticket: %s\n", mejor->id) ;
+    printf("Dispositivo: ") ;
     switch (mejor->dispositivo) {
-    case 1 : printf("Smartphone") ;
-      break ;
-    case 2 : printf("Computador") ;
-      break ;
-    case 3 : printf("Electrodomestico") ;
-      break ;
-    case 4 : printf("Television") ;
-      break ;
-    case 5 : printf("Otro") ;
-      break ;
+      case 1 : printf("Smartphone") ; break ;
+      case 2 : printf("Computador") ; break ;
+      case 3 : printf("Electrodomestico") ; break ;
+      case 4 : printf("Television") ; break ;
+      case 5 : printf("Otro") ; break ;
     }
-    printf("Dispositivo: %s\n", mejor->dispositivo) ;
     printf("Descripcion: %s\n", mejor->descripcion) ;
     printf("Prioridad: %s\n", prioridadF) ;
     printf("Hora: %s\n", horaStr) ;
