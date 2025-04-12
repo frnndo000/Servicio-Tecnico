@@ -78,26 +78,37 @@ void asignar_prioridad(List *tickets) {
   printf("No se encontro el ticket con ID %s\n", id) ;
 }
 
+
+int lower_than(void *data1, void *data2) {
+  Ticket *t1 = (Ticket *) data1 ;
+  Ticket *t2 = (Ticket *) data2 ;
+
+  if (t1->prioridad < t2->prioridad)
+      return 1 ;
+  if (t1->prioridad > t2->prioridad)
+      return 0 ;
+
+  return difftime(t1->hora, t2->hora) < 0 ;
+}
+
 void mostrar_lista_tickets(List *tickets) {
   if (list_size(tickets) == 0) {
     printf("No hay tickets pendientes. \n") ; 
     return ;
-  } 
-  
-  List *ordenados = list_create() ;
-  Ticket *t = list_first(tickets) ;
-  while (t != NULL) {
-    list_pushBack(ordenados, t) ;
-    t = list_next(tickets) ;
   }
-  
-  //list_sort(ordenados, comparar_tickets) ; 
 
   printf("\nTickets pendientes:\n") ;
   printf("=============================================================================\n") ;
   printf("| %-3s | %-10s | %-10s | %-25s | %-8s |\n", 
                "#", "ID", "Prioridad", "Descripcion", "Hora") ;
   printf("=============================================================================\n") ;
+
+  List *ordenados = list_create() ;
+  Ticket *t = list_first(tickets) ;
+  while (t != NULL) {
+    list_sortedInsert(ordenados, t, lower_than) ;
+    t = list_next(tickets) ;
+  }
 
   int index = 1 ;
   t = list_first(ordenados) ;
