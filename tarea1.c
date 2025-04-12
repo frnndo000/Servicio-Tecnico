@@ -46,51 +46,76 @@ void registrar_ticket(List *ticket) {
   printf("(3) Electrodomestico\n") ;
   printf("(4) Television\n") ;
   printf("(5) Otro\n") ;
-
   scanf("%d", &nuevoTicket->dispositivo) ;
   getchar() ;
 
   printf("Describa el problema: ") ;
-  fgets(nuevoTicket->descripcion, 25, stdin) ;
-  getchar() ;
+  fgets(nuevoTicket->descripcion, 200, stdin) ;
+  nuevoTicket->descripcion[strcspn(nuevoTicket->descripcion, "\n")] = 0 ;
 
   nuevoTicket->prioridad = 3 ;
   nuevoTicket->hora = time(NULL) ;
 
   list_pushBack(ticket, nuevoTicket) ;
-
   printf("El ticket %s ha sido registrado correctamente.\n", nuevoTicket->id) ;
+}
+
+void asignar_prioridad(List *tickets) {
+  char id[30];
+  printf("Ingrese ID del ticket para modificar su prioridad: ") ;
+  scanf("%s", id) ;
+
+  Ticket *t = list_first(tickets) ;
+  while (t != NULL) {
+    if (strcmp(t->id, id) == 0) {
+      printf("Seleccione nueva prioridad (1-Alto, 2-Medio, 3-Bajo): ") ;
+      scanf("%d", &t->prioridad) ;
+      printf("Prioridad actualizada correctamente.\n") ;
+      return ;
+    }
+    t = list_next(tickets) ;
+  }
+  printf("No se encontro el ticket con ID %s\n", id) ;
 }
 
 void mostrar_lista_tickets(List *tickets) {
   if (list_size(tickets) == 0) {
-    printf("No hay tickets pendientes. \n") ;
-  } else {
-    printf("\nTickets pendientes: \n") ;
-    
-    printf("=============================================================================\n") ;
-    printf("| %-2s | %-15s | %-10s | %-25s | %-8s |\n", 
+    printf("No hay tickets pendientes. \n") ; 
+    return ;
+  } 
+  
+  List *ordenados = list_create() ;
+  Ticket *t = list_first(tickets) ;
+  while (t != NULL) {
+    list_pushBack(ordenados, t) ;
+    t = list_next(tickets) ;
+  }
+  
+  //list_sort(ordenados, comparar_tickets) ; 
+
+  printf("\nTickets pendientes:\n") ;
+  printf("=============================================================================\n") ;
+  printf("| %-3s | %-10s | %-10s | %-25s | %-8s |\n", 
                "#", "ID", "Prioridad", "Descripcion", "Hora") ;
-    printf("=============================================================================\n") ;
+  printf("=============================================================================\n") ;
 
-    int index = 1 ;
-    Ticket* temp = (Ticket *) list_first(tickets) ;
-    while (temp != NULL) { 
-      char horaStr[20];
-      strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&temp->hora)) ;
-
-      printf("| %-2d | %-15s | %-10d | %-25.25s | %-8s |\n", 
-                index, temp->id, temp->prioridad, temp->descripcion, horaStr) ; 
-      index++ ; 
-      temp = (Ticket*) list_next(tickets) ;
-    }
+  int index = 1 ;
+  t = list_first(ordenados) ;
+  while (t != NULL) { 
+    char horaStr[20];
+    strftime(horaStr, sizeof(horaStr), "%H:%M:%S", localtime(&t->hora)) ;
+    char *prio = t->prioridad == 1 ? "Alto" : t->prioridad == 2 ? "Medio" : "Bajo" ;
+    printf("| %-3d | %-10s | %-10d | %-25.25s | %-8s |\n", 
+                index, t->id, t->prioridad, t->descripcion, horaStr) ; 
+    index++ ; 
+    t = list_next(ordenados) ;
+  }
     printf("=============================================================================\n") ;
-  }  
-}
+} 
 
 int main() {
   char opcion;
-  List* tickets = list_create() ;
+  List* lista_tickets = list_create() ;
   do {
     mostrarMenuPrincipal();
 
@@ -98,20 +123,15 @@ int main() {
     scanf(" %c", &opcion); 
 
     switch (opcion) {
-    case '1':
-      registrar_ticket(tickets) ;
+    case '1': registrar_ticket(lista_tickets) ;
       break;
-    case '2':
-      // Lógica para asignar prioridad
+    case '2': asignar_prioridad(lista_tickets) ;
       break;
-    case '3':
-      mostrar_lista_tickets(tickets) ;
+    case '3': mostrar_lista_tickets(lista_tickets) ;
       break;
-    case '4':
-      // Lógica para atender al siguiente paciente
+    case '4'://procesar_siguiente_ticket(lista_tickets) ;
       break;
-    case '5':
-      // Lógica para mostrar pacientes por prioridad
+    case '5'://buscar_ticket(lista_tickets) ;
       break;
     case '6':
       puts("Saliendo del sistema de gestion de tickets...");
@@ -121,10 +141,9 @@ int main() {
     }
     presioneTeclaParaContinuar();
 
-  } while (opcion != '6');
+  } while (opcion != '6') ;
 
-  // Liberar recursos, si es necesario
-  list_clean(tickets);
+  list_clean(lista_tickets) ;
 
   return 0;
 }
