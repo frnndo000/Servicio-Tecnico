@@ -40,7 +40,7 @@ void registrar_ticket(List *ticket) {
   getchar() ;
 
   printf("Describa el problema: ") ;
-  fgets(nuevoTicket->descripcion, 200, stdin) ;
+  fgets(nuevoTicket->descripcion, 25, stdin) ;
 
   nuevoTicket->prioridad = 3 ;
   nuevoTicket->hora = time(NULL) ;
@@ -57,7 +57,7 @@ void mostrar_lista_tickets(List *tickets) {
     printf("\nTickets pendientes: \n") ;
     
     printf("=============================================================================\n") ;
-    printf("| %-2s | %-15s | %-13s | %-9s | %-20s |\n", 
+    printf("| %-2s | %-15s | %-10s | %-25s | %-20s |\n", 
                "#", "ID", "Prioridad", "Descripcion", "Hora") ;
     printf("=============================================================================\n") ;
 
@@ -78,13 +78,12 @@ void mostrar_lista_tickets(List *tickets) {
 
 int main() {
   char opcion;
-  List* tickets = list_create() ; // Lista para almacenar los tickets.
+  List* tickets = list_create() ;
   do {
     mostrarMenuPrincipal();
 
     printf("Ingrese su opcion: ");
-    scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
-                           // newline anterior
+    scanf(" %c", &opcion); 
 
     switch (opcion) {
     case '1':
