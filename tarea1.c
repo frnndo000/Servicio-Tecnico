@@ -201,7 +201,6 @@ void buscar_ticket(List *tickets) {
     temp = list_next(tickets) ;
   }
   printf("Ticket no encontrado.\n") ;
-
 }
 
 int main() {
