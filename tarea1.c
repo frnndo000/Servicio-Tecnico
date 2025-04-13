@@ -49,7 +49,7 @@ void registrar_ticket(List *ticket) {
   scanf("%d", &nuevoTicket->dispositivo) ;
   getchar() ;
 
-  printf("Describa el problema: ") ;
+  printf("Describa el problema brevemente: ") ;
   fgets(nuevoTicket->descripcion, 200, stdin) ;
   nuevoTicket->descripcion[strcspn(nuevoTicket->descripcion, "\n")] = 0 ;
 
